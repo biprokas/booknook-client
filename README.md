@@ -48,7 +48,7 @@ BookNook is a small online library management platform where readers can discove
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_FRONTEND_REPOSITORY_URL
+git clone https://github.com/biprokas/booknook-client
 cd booknook-client
 ```
 
