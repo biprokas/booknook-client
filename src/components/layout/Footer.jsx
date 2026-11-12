@@ -56,12 +56,12 @@ export default function Footer() {
           <ul className="space-y-4 text-sm">
             <li className="flex items-center gap-3">
               <Mail size={17} className="text-emerald-500" />
-              hello@booknook.com
+              bipro@booknook.com
             </li>
 
             <li className="flex items-center gap-3">
               <Phone size={17} className="text-emerald-500" />
-              +880 1700-000000
+              +8801804-670559
             </li>
 
             <li className="flex items-center gap-3">
