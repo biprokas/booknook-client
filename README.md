@@ -65,16 +65,14 @@ Create a `.env.local` file in the frontend root directory.
 Add the required variables:
 
 ```env
-BETTER_AUTH_SECRET=your_secret
+BETTER_AUTH_SECRET=whyli7u9Oc6EoEQKgJFB1ac3zSeeSqkg
 BETTER_AUTH_URL=http://localhost:3000
-MONGODB_URI=your_mongodb_connection_string
+MONGODB_URI=mongodb://book-nook:XgbiHuhcnZrT59zB@ac-ybofmwb-shard-00-00.2kajmiz.mongodb.net:27017,ac-ybofmwb-shard-00-01.2kajmiz.mongodb.net:27017,ac-ybofmwb-shard-00-02.2kajmiz.mongodb.net:27017/?ssl=true&replicaSet=atlas-80t5fl-shard-0&authSource=admin
 DB_NAME=bookNook
 NEXT_PUBLIC_API_URL=http://localhost:5000
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CLIENT_ID=108407529295-k9hknbl3id5opetdut0f49ufo78mrs4o.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
 ```
-
-Never commit your actual secrets or environment files.
 
 ### 4. Start the development server
 
