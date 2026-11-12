@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BookNook — Your Little Library
 
-## Getting Started
+BookNook is a small online library management platform where readers can discover books, share their own collections, borrow books, and manage their borrowing activities.
 
-First, run the development server:
+## 🌐 Live Website
+
+**Live URL:** Add your deployed website URL here.
+
+## ✨ Key Features
+
+- **User Authentication:** Register and log in using email/password or Google.
+- **Browse Books:** Explore all available books in a responsive book collection.
+- **Book Details:** View book information, descriptions, authors, and availability.
+- **Add Books:** Upload book covers and add books to the library.
+- **My Books:** Manage your uploaded books with edit and delete functionality.
+- **Borrow Books:** Borrow available books and select a return date.
+- **My Borrows:** View borrowed books and return them.
+- **Profile Management:** Update your profile name and profile image.
+- **Responsive Design:** Enjoy the application on desktop, tablet, and mobile devices.
+
+## 🛠️ Technologies Used
+
+**Frontend:**
+
+- Next.js
+- React
+- JavaScript
+- Tailwind CSS
+- shadcn/ui
+- Better Auth
+- Swiper
+- Sonner
+
+**Backend:**
+
+- Node.js
+- Express.js
+- MongoDB
+- JSON Web Token (JWT)
+
+**Other Services:**
+
+- Google OAuth
+- ImgBB image hosting
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_FRONTEND_REPOSITORY_URL
+cd booknook-client
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env.local` file in the frontend root directory.
+
+Add the required variables:
+
+```env
+BETTER_AUTH_SECRET=your_secret
+BETTER_AUTH_URL=http://localhost:3000
+MONGODB_URI=your_mongodb_connection_string
+DB_NAME=bookNook
+NEXT_PUBLIC_API_URL=http://localhost:5000
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+Never commit your actual secrets or environment files.
+
+### 4. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 5. Start the backend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open the separate backend project, install its dependencies, configure its `.env` file, and run:
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Make sure MongoDB is connected and the backend is running on port 5000.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+booknook-client/
+├── src/
+│   ├── app/
+│   ├── components/
+│   └── lib/
+├── public/
+├── .env.local
+└── README.md
+```
 
-## Deploy on Vercel
+## 👨‍💻 Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Bipro Prokas**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GitHub: [https://github.com/biprokas](https://github.com/biprokas)
