@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -8,58 +7,27 @@ import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
   const router = useRouter();
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    image: "",
-    password: "",
-  });
-
+  const [formData, setFormData] = useState({ name: "", email: "", image: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // Email registration
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    const { password } = formData;
 
-    const { name, email, image, password } = formData;
-
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
-
-    if (!/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
-      setError("Password must contain uppercase and lowercase letters.");
-      return;
+    if (password.length < 6 || !/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
+      return setError("Password must be at least 6 characters and include upper & lowercase letters.");
     }
 
     setLoading(true);
-
     try {
-      const { error } = await authClient.signUp.email({
-        name,
-        email,
-        password,
-        image: image || undefined,
-      });
-
-      if (error) {
-        setError(error.message || "Registration failed.");
-        return;
-      }
-
-      router.push("/login");
+      const { error } = await authClient.signUp.email({ ...formData, image: formData.image || undefined });
+      if (error) return setError(error.message || "Registration failed.");
+      router.push("/");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -67,17 +35,11 @@ export default function RegisterPage() {
     }
   };
 
-  // Google registration
   const handleGoogleLogin = async () => {
     setError("");
     setGoogleLoading(true);
-
     try {
-      const { error } = await authClient.signIn.social({
-        provider: "google",
-        callbackURL: "/",
-      });
-
+      const { error } = await authClient.signIn.social({ provider: "google", callbackURL: "/" });
       if (error) {
         setError(error.message || "Google registration failed.");
         setGoogleLoading(false);
@@ -88,117 +50,56 @@ export default function RegisterPage() {
     }
   };
 
+  const inputClass = "w-full rounded-lg border border-stone-300 px-4 py-3 text-stone-900 placeholder-stone-400 outline-none focus:border-emerald-600";
+
   return (
     <main className="flex min-h-[70vh] items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md rounded-2xl border bg-white p-8 shadow-sm">
-        <h1 className="text-center text-3xl font-bold">Create Account</h1>
-
-        <p className="mt-2 text-center text-gray-500">
-          Join BookNook and explore your little library.
-        </p>
+      <div className="w-full max-w-md rounded-2xl border border-stone-200 bg-white p-8 shadow-sm">
+        <h1 className="text-center text-3xl font-bold text-stone-900">Create Account</h1>
+        <p className="mt-2 text-center text-stone-500">Join BookNook and explore your little library.</p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium">
-              Full Name
-            </label>
-            <input
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full rounded-lg border px-4 py-3 outline-none focus:border-blue-500"
-              placeholder="Enter your name"
-            />
+            <label className="mb-1 block text-sm font-medium text-stone-700">Full Name</label>
+            <input name="name" type="text" value={formData.name} onChange={handleChange} required className={inputClass} placeholder="Enter your name" />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium">
-              Email Address
-            </label>
-            <input
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full rounded-lg border px-4 py-3 outline-none focus:border-blue-500"
-              placeholder="Enter your email"
-            />
+            <label className="mb-1 block text-sm font-medium text-stone-700">Email Address</label>
+            <input name="email" type="email" value={formData.email} onChange={handleChange} required className={inputClass} placeholder="Enter your email" />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium">
-              Profile Image URL
-            </label>
-            <input
-              name="image"
-              type="url"
-              value={formData.image}
-              onChange={handleChange}
-              className="w-full rounded-lg border px-4 py-3 outline-none focus:border-blue-500"
-              placeholder="https://example.com/photo.jpg"
-            />
+            <label className="mb-1 block text-sm font-medium text-stone-700">Profile Image URL</label>
+            <input name="image" type="url" value={formData.image} onChange={handleChange} className={inputClass} placeholder="https://example.com/photo.jpg" />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium">
-              Password
-            </label>
-            <input
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              minLength={6}
-              className="w-full rounded-lg border px-4 py-3 outline-none focus:border-blue-500"
-              placeholder="Create a password"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              At least 6 characters, including uppercase and lowercase letters.
-            </p>
+            <label className="mb-1 block text-sm font-medium text-stone-700">Password</label>
+            <input name="password" type="password" value={formData.password} onChange={handleChange} required minLength={6} className={inputClass} placeholder="Create a password" />
+            <p className="mt-1 text-xs text-stone-500">At least 6 characters, including uppercase and lowercase letters.</p>
           </div>
 
-          {error && (
-            <p className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
-              {error}
-            </p>
-          )}
+          {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-600">{error}</p>}
 
-          <button
-            type="submit"
-            disabled={loading || googleLoading}
-            className="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
-          >
+          <button type="submit" disabled={loading || googleLoading} className="w-full rounded-lg bg-emerald-700 px-4 py-3 font-semibold text-white transition hover:bg-emerald-800 disabled:opacity-60">
             {loading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
 
-        {/* Divider */}
         <div className="my-6 flex items-center gap-3">
-          <div className="h-px flex-1 bg-gray-200" />
-          <span className="text-sm text-gray-400">OR</span>
-          <div className="h-px flex-1 bg-gray-200" />
+          <div className="h-px flex-1 bg-stone-200" />
+          <span className="text-sm text-stone-400">OR</span>
+          <div className="h-px flex-1 bg-stone-200" />
         </div>
 
-        {/* Google Registration */}
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          disabled={loading || googleLoading}
-          className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 px-4 py-3 font-semibold text-gray-700 transition hover:bg-gray-50 disabled:opacity-60"
-        >
-          <span className="text-xl font-bold text-blue-600">G</span>
+        <button type="button" onClick={handleGoogleLogin} disabled={loading || googleLoading} className="flex w-full items-center justify-center gap-3 rounded-lg border border-stone-300 px-4 py-3 font-semibold text-stone-700 transition hover:bg-stone-50 disabled:opacity-60">
+          <span className="text-xl font-bold text-emerald-700">G</span>
           {googleLoading ? "Connecting to Google..." : "Continue with Google"}
         </button>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{" "}
-          <Link href="/login" className="font-semibold text-blue-600">
-            Login
-          </Link>
+        <p className="mt-6 text-center text-sm text-stone-600">
+          Already have an account? <Link href="/login" className="font-semibold text-emerald-700 hover:text-emerald-600">Login</Link>
         </p>
       </div>
     </main>
