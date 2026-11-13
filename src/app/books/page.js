@@ -2,6 +2,7 @@
 import { getBooks } from "@/lib/api";
 import BookCard from "@/components/books/BookCard";
 import { Library } from "lucide-react";
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "BookNook | All Books",
